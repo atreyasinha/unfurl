@@ -1,0 +1,75 @@
+apiVersion: unfurl/v1alpha1
+kind: Ensemble
+spec:
+  service_template:
+    imports:
+    - repository: unfurl
+      file: tosca_plugins/artifacts.yaml
+    topology_template:
+      node_templates:
+
+        terraform-example:
+          type: unfurl.nodes.Installer.Terraform
+          interfaces:
+            defaults:
+              inputs:
+                tfvars:
+                  tag: test
+                main: |2-
+
+                  output "hello_world" {	
+                    value = "Hello, World!"
+                  }
+lock:
+  runtime:
+    unfurl:
+      version: 0.3.1
+      digest: ''
+  repositories:
+  - url: file:/Users/atreya/.unfurl_home/.venv/lib/python3.9/site-packages/unfurl
+    revision: ''
+    initial: ''
+    name: unfurl
+  - url: file:/Users/atreya/Desktop/common/aws-staging
+    revision: ''
+    initial: ''
+    name: self
+  - url: file:///Users/atreya/Desktop/common/aws-staging/
+    revision: c6fb899d5dc8fcd0beb43662e6d12d41e5f19e1d-dirty
+    initial: abc12566b0de61ede59b3b047f05e01efcb6eb7a
+  - url: file:///Users/atreya/Desktop/common/aws-staging/
+    revision: c6fb899d5dc8fcd0beb43662e6d12d41e5f19e1d-dirty
+    initial: abc12566b0de61ede59b3b047f05e01efcb6eb7a
+  ensembles:
+    localhost:
+      uri: git-local://ff959adede6e4e2d33d08788446c00feef6000ce:/ensemble.yaml
+      changeId:
+      digest: 07917ce52c972d040f38d2522b28b540c7bc7edd
+      manifest:
+        file: ensemble/ensemble.yaml
+status:
+  inputs: {}
+  outputs: {}
+  instances:
+    terraform-example:
+      template: terraform-example
+      attributes:
+        hello_world: Hello, World!
+      priority: required
+      readyState:
+        local: ok
+        state: configured
+      lastConfigChange: A21T3H1W0001
+      created: A21T3H1W0001
+lastJob:
+  changeId: A21T3H1W0000
+  startTime: 2022-01-29-03-17-01-526166
+  workflow: deploy
+  options: {}
+  summary: 1 tasks (1 changed, 1 ok, 0 failed, 0 unknown, 0 skipped)
+  specDigest: 699923979dffd5afe4fc27e1ea23272af286bc06
+  priority: required
+  readyState:
+    local: ok
+  changelog: jobs/job2022-01-29-03-17-01-526166.yaml
+jobsLog: jobs.tsv
